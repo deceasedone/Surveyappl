@@ -12,11 +12,15 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
-// Middleware
+// CORS configuration
 app.use(cors({
-  origin: 'http://localhost:5000', // Allow requests from frontend
+  origin: process.env.CORS_ORIGIN || 'http://localhost:5000',
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Middleware
 app.use(express.json());
 
 // Debugging middleware
